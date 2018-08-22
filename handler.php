@@ -44,12 +44,11 @@ switch ($data->type) {
 		
 		//$db_selected = mysql_select_db('f0229431_root', $link);
 		
-		$result = mysql_query("SELECT count FROM countsmart");
+		$result = mysql_query("UPDATE count SET count='".$bodyText."'");
 		if (!$result) {
 			$message  = 'Неверный запрос: ' . mysql_error() . "\n";
 			die($message);
 		}
-		mysql_free_result($result);
 		
 		$request_params = array(
 		'user_id' => $data->object->user_id,
