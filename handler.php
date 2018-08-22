@@ -4,8 +4,6 @@ if (!isset($_REQUEST)) {
     return;
 }
 
-echo "sdfghg";
-
 //Строка для подтверждения адреса сервера из настроек Callback API
 $confirmationToken = 'c06880a7';
 
