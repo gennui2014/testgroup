@@ -1,7 +1,11 @@
 <?php
-$link = mysql_connect('f0229431.xsph.ru', 'f0229431_root', 'admin');
+$link = mysqli_connect('f0229431.xsph.ru', 'f0229431_root', 'admin', "f0229431_root");
+
 if (!$link) {
-    die('Ошибка соединения: ' . mysql_error());
+    echo "Ошибка: Невозможно установить соединение с MySQL." . PHP_EOL;
+    echo "Код ошибки errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Текст ошибки error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
 }
 
 require_once('config.php');
