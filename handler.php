@@ -44,7 +44,7 @@ switch ($data->type) {
 		$bodyText = intval($data->object->body);
 		$request_params = "null";
 		
-		if($idCurrUser == "321321 95265482!"){
+		if($idCurrUser == "952654822"){
 			$sql = "UPDATE countsmart SET count='".$bodyText."'";
 
 			
