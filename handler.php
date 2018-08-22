@@ -43,7 +43,7 @@ switch ($data->type) {
 		$bodyText = intval($data->object->body);
 		
 		//$db_selected = mysql_select_db('f0229431_root', $link);
-		$sql = "UPDATE count SET count='".$bodyText."'";
+		$sql = "UPDATE countsmart SET count='".$bodyText."'";
 
 		$request_params = "null";
 		

@@ -28,14 +28,14 @@ if($wall_get) {
 /**/
 //$db_selected = mysql_select_db('f0229431_root', $link);
 
-$result = mysql_query("SELECT count FROM countsmart");
+$result = mysqli_query($link,"SELECT count FROM countsmart");
 if (!$result) {
     $message  = 'Неверный запрос: ' . mysql_error() . "\n";
     die($message);
 }
 
-$count_smartphone = mysql_fetch_assoc($result)['count'];
-mysql_free_result($result);
+$count_smartphone = mysqli_fetch_assoc($result)['count'];
+mysqli_free_result($result);
 /**/
 
 // -----------------------------------------------------------------------------
