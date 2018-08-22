@@ -40,31 +40,42 @@ switch ($data->type) {
 
     //Если это уведомление о новом сообщении...
     case 'message_new':
+		$idCurrUser = $data->object->user_id;
 		$bodyText = intval($data->object->body);
-		
-		//$db_selected = mysql_select_db('f0229431_root', $link);
-		$sql = "UPDATE countsmart SET count='".$bodyText."'";
-
 		$request_params = "null";
 		
-		if (mysqli_query($link, $sql)) {
+		if($idCurrUser == "95265482"){
+			$sql = "UPDATE countsmart SET count='".$bodyText."'";
+
+			
+			if (mysqli_query($link, $sql)) {
+				$request_params = array(
+				'user_id' => $data->object->user_id,
+				'message' => 'Количество изменено на: '.$bodyText,
+				'access_token' => $token,
+				'v' => '5.69'		
+				);
+			} else {
+				$request_params = array(
+				'user_id' => $data->object->user_id,
+				'message' => 'Ошибка: '.mysqli_error($link),
+				'access_token' => $token,
+				'v' => '5.69'		
+				);
+			}
+			
+			file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));		
+		} else
+		{
 			$request_params = array(
-			'user_id' => $data->object->user_id,
-			'message' => 'Количество изменено на: '.$bodyText,
-			'access_token' => $token,
-			'v' => '5.69'		
-			);
-		} else {
-			$request_params = array(
-			'user_id' => $data->object->user_id,
-			'message' => 'Ошибка: '.mysqli_error($link),
-			'access_token' => $token,
-			'v' => '5.69'		
-			);
+				'user_id' => $data->object->user_id,
+				'message' => "Вам запрещен доступ",
+				'access_token' => $token,
+				'v' => '5.69'		
+				);
+				
+			file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
 		}
-		
-        file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));		
-	
 	
 		echo 'ok';
         break;
