@@ -2,9 +2,7 @@
 $link = mysqli_connect('f0229431.xsph.ru', 'f0229431_root', 'admin', "f0229431_root");
 
 if (!$link) {
-    echo "Ошибка: Невозможно установить соединение с MySQL." . PHP_EOL;
-    echo "Код ошибки errno: " . mysqli_connect_errno() . PHP_EOL;
-    echo "Текст ошибки error: " . mysqli_connect_error() . PHP_EOL;
+    
     exit;
 }
 
@@ -40,41 +38,28 @@ switch ($data->type) {
 
     //Если это уведомление о новом сообщении...
     case 'message_new':
-	$bodyText = intval($data->object->body);
-	
-	if(is_int($bodyText)){
+		$bodyText = intval($data->object->body);
+		
 		//$db_selected = mysql_select_db('f0229431_root', $link);
 		
-		/*$result = mysql_query("SELECT count FROM countsmart");
+		$result = mysql_query("SELECT count FROM countsmart");
 		if (!$result) {
 			$message  = 'Неверный запрос: ' . mysql_error() . "\n";
 			die($message);
 		}
-
-		$count_smartphone = mysql_fetch_assoc($result)['count'];
-		mysql_free_result($result);*/
+		mysql_free_result($result);
 		
 		$request_params = array(
 		'user_id' => $data->object->user_id,
-		'message' => 'Успешно',
+		'message' => 'Количество изменено на: '.$bodyText,
 		'access_token' => $token,
 		'v' => '5.69'		
 		);
 		
         file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));		
-	} else {
 	
-		$request_params = array(
-		'user_id' => $data->object->user_id,
-		'message' => $data->object->body,
-		'access_token' => $token,
-		'v' => '5.69'		
-		);
-		
-        file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));		
-	}
 	
-	echo 'ok';
+		echo 'ok';
         break;
 }
 ?>

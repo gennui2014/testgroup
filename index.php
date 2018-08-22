@@ -26,7 +26,7 @@ if($wall_get) {
 /*КОНЕЦ количество комментов под постом*/
 
 /**/
-$db_selected = mysql_select_db('testgroup', $link);
+$db_selected = mysql_select_db('f0229431_root', $link);
 
 $result = mysql_query("SELECT count FROM countsmart");
 if (!$result) {
