@@ -45,14 +45,23 @@ switch ($data->type) {
 	if(var_dump(is_int($bodyText))){
 		//$db_selected = mysql_select_db('f0229431_root', $link);
 		
-		$result = mysql_query("SELECT count FROM countsmart");
+		/*$result = mysql_query("SELECT count FROM countsmart");
 		if (!$result) {
 			$message  = 'Неверный запрос: ' . mysql_error() . "\n";
 			die($message);
 		}
 
 		$count_smartphone = mysql_fetch_assoc($result)['count'];
-		mysql_free_result($result);
+		mysql_free_result($result);*/
+		
+		$request_params = array(
+		'user_id' => $data->object->user_id,
+		'message' => 'Успешно',
+		'access_token' => $token,
+		'v' => '5.69'		
+		);
+		
+        file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));		
 	} else {
 	
 		$request_params = array(
