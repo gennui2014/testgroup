@@ -42,7 +42,7 @@ switch ($data->type) {
     case 'message_new':
 	$bodyText = intval($data->object->body);
 	
-	if(var_dump(is_int($bodyText))){
+	if(is_int($bodyText)){
 		//$db_selected = mysql_select_db('f0229431_root', $link);
 		
 		/*$result = mysql_query("SELECT count FROM countsmart");
@@ -75,47 +75,6 @@ switch ($data->type) {
 	}
 	
 	echo 'ok';
-        /*//...получаем id его автора
-        $userId = $data->object->user_id;
-        //затем с помощью users.get получаем данные об авторе
-        $userInfo = json_decode(file_get_contents("https://api.vk.com/method/users.get?user_ids={$userId}&v=5.80"));
-
-        //и извлекаем из ответа его имя
-        $user_name = $userInfo->response[0]->first_name;
-
-*/
-        break;
-
-    // Если это уведомление о вступлении в группу
-    case 'group_join':
-	/*
-        //...получаем id нового участника
-        $userId = $data->object->user_id;
-
-        //затем с помощью users.get получаем данные об авторе
-        $userInfo = json_decode(file_get_contents("https://api.vk.com/method/users.get?user_ids={$userId}&v=5.8"));
-
-        //и извлекаем из ответа его имя
-        $user_name = $userInfo->response[0]->first_name;
-
-        //С помощью messages.send и токена сообщества отправляем ответное сообщение
-        $request_params = array(
-            'message' => "Добро пожаловать в наше сообщество МГТУ им. Баумана ИУ5 2016, {$user_name}!<br>" .
-                            "Если у Вас возникнут вопросы, то вы всегда можете обратиться к администраторам сообщества.<br>" .
-                            "Их контакты можно найти в соответсвующем разделе группы.<br>" .
-                            "Успехов в учёбе!",
-            'user_id' => $userId,
-            'access_token' => $token,
-            'v' => '5.8'
-        );
-
-        $get_params = http_build_query($request_params);
-
-        file_get_contents('https://api.vk.com/method/messages.send?' . $get_params);
-
-        //Возвращаем "ok" серверу Callback API
-        echo('ok');
-	*/
         break;
 }
 ?>
