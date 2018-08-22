@@ -35,6 +35,7 @@ switch ($data->type) {
 
     //Если это уведомление о новом сообщении...
     case 'message_new':
+		echo 'ok';
 		$idCurrUser = $data->object->user_id;
 		$bodyText = intval($data->object->body);
 		$request_params = "null";
@@ -70,9 +71,7 @@ switch ($data->type) {
 				);
 				
 			file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
-		}
-	
-		echo 'ok';
+		}	
         break;
 }
 ?>
