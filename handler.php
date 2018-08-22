@@ -1,4 +1,6 @@
 <?php
+header("HTTP/1.1 200 OK");
+
 $link = mysqli_connect('f0229431.xsph.ru', 'f0229431_root', 'admin', "f0229431_root");
 
 if (!$link) {
