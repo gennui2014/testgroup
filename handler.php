@@ -34,7 +34,7 @@ switch ($data->type) {
     case 'message_new':
 		$request_params = array(
 		'user_id' => $data->object->user_id,
-		'message' => 'Test',
+		'message' => $userId = $data->object->message,
 		'access_token' => $token,
 		'v' => '5.69'		
 		);
