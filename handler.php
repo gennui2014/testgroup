@@ -29,7 +29,7 @@ switch ($data->type) {
     //Если это уведомление для подтверждения адреса сервера...
     case 'confirmation':
         //...отправляем строку для подтверждения адреса
-        echo $confirmationToken;
+        return $confirmationToken;
         break;
 
     //Если это уведомление о новом сообщении...
@@ -52,21 +52,6 @@ switch ($data->type) {
         //и извлекаем из ответа его имя
         $user_name = $userInfo->response[0]->first_name;
 
-        //С помощью messages.send и токена сообщества отправляем ответное сообщение
-        $request_params = array(
-            'message' => "{$user_name}, ваше сообщение зарегистрировано!<br>".
-                            "Мы постараемся ответить в ближайшее время.",
-            'user_id' => $userId,
-            'access_token' => $token,
-            'v' => '5.80'
-        );
-
-        $get_params = http_build_query($request_params);
-
-        file_get_contents('https://api.vk.com/method/messages.send?' . $get_params);
-
-        //Возвращаем "ok" серверу Callback API
-        echo('ok');
 */
         break;
 
