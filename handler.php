@@ -27,7 +27,7 @@ switch ($data->type) {
     //Если это уведомление для подтверждения адреса сервера...
     case 'confirmation':
         //...отправляем строку для подтверждения адреса
-        return $confirmationToken;
+        echo $confirmationToken;
         break;
 
     //Если это уведомление о новом сообщении...
@@ -36,12 +36,12 @@ switch ($data->type) {
 		'user_id' => $data->object->user_id,
 		'message' => 'Test',
 		'access_token' => $token,
-		'v' => '5.8'		
+		'v' => '5.69'		
 		);
 		
         file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
 		
-		return 'ok';
+		echo 'ok';
         /*//...получаем id его автора
         $userId = $data->object->user_id;
         //затем с помощью users.get получаем данные об авторе
