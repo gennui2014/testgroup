@@ -47,7 +47,7 @@ switch ($data->type) {
 
 		$request_params = "null";
 		
-		if ($conn->query($sql) === TRUE) {
+		if ($mysqli_query($link, $sql)) === TRUE) {
 			$request_params = array(
 			'user_id' => $data->object->user_id,
 			'message' => 'Количество изменено на: '.$bodyText,
@@ -57,7 +57,7 @@ switch ($data->type) {
 		} else {
 			$request_params = array(
 			'user_id' => $data->object->user_id,
-			'message' => 'Ошибка: '.$conn->error,
+			'message' => 'Ошибка: '.$link->error,
 			'access_token' => $token,
 			'v' => '5.69'		
 			);
