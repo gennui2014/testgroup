@@ -47,7 +47,7 @@ switch ($data->type) {
 
 		$request_params = "null";
 		
-		if (mysqli_query($link, $sql)) == TRUE) {
+		if (mysqli_query($link, $sql)) {
 			$request_params = array(
 			'user_id' => $data->object->user_id,
 			'message' => 'Количество изменено на: '.$bodyText,
