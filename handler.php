@@ -1,5 +1,10 @@
 <?php
 
+$link = mysql_connect('f0229431.xsph.ru', 'f0229431_root', 'admin');
+if (!$link) {
+    die('Ошибка соединения: ' . mysql_error());
+}
+
 if (!isset($_REQUEST)) {
     return;
 }
@@ -32,6 +37,20 @@ switch ($data->type) {
 
     //Если это уведомление о новом сообщении...
     case 'message_new':
+	
+	if(var_dump(is_int($data->object->body))){
+		$db_selected = mysql_select_db('f0229431_root', $link);
+		
+		$result = mysql_query("SELECT count FROM countsmart");
+		if (!$result) {
+			$message  = 'Неверный запрос: ' . mysql_error() . "\n";
+			die($message);
+		}
+
+		$count_smartphone = mysql_fetch_assoc($result)['count'];
+		mysql_free_result($result);
+	} else {
+	
 		$request_params = array(
 		'user_id' => $data->object->user_id,
 		'message' => $data->object->body,
@@ -39,9 +58,10 @@ switch ($data->type) {
 		'v' => '5.69'		
 		);
 		
-        file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
-		
-		echo 'ok';
+        file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));		
+	}
+	
+	echo 'ok';
         /*//...получаем id его автора
         $userId = $data->object->user_id;
         //затем с помощью users.get получаем данные об авторе

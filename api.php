@@ -1,5 +1,5 @@
 <?php
-$link = mysql_connect('localhost', 'root', '');
+$link = mysql_connect('f0229431.xsph.ru', 'f0229431_root', 'admin');
 if (!$link) {
     die('Ошибка соединения: ' . mysql_error());
 }
