@@ -11,31 +11,20 @@ if (!isset($_REQUEST)) {
     return;
 }
 
-//Строка для подтверждения адреса сервера из настроек Callback API
 $confirmationToken = 'c06880a7';
-
-//Ключ доступа сообщества
 $token = '7b45b786905029b4ffc0588e8f4ac23c1cfc2a270536ab6e2005198f0d550821354004a88e703a1e57ed2';
-
-// Secret key
 $secretKey = 'TestADMIN';
 
-//Получаем и декодируем уведомление
 $data = json_decode(file_get_contents('php://input'));
 
-// проверяем secretKey
 if($data->secret !== $secretKey && $data->type != 'confirmation')
     return;
 
-//Проверяем, что находится в поле "type"
 switch ($data->type) {
-    //Если это уведомление для подтверждения адреса сервера...
     case 'confirmation':
-        //...отправляем строку для подтверждения адреса
         echo $confirmationToken;
         break;
 
-    //Если это уведомление о новом сообщении...
     case 'message_new':
 		echo 'ok';
 		$idCurrUser = $data->object->user_id;
