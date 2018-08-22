@@ -33,8 +33,8 @@ switch ($data->type) {
     //Если это уведомление о новом сообщении...
     case 'message_new':
 		$request_params = array(
-		'user_id' => $data->object->body,
-		'message' => $userId = $data->object->message,
+		'user_id' => $data->object->user_id,
+		'message' => $data->object->message,
 		'access_token' => $token,
 		'v' => '5.69'		
 		);
