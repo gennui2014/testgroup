@@ -40,8 +40,8 @@ switch ($data->type) {
 
     //Если это уведомление о новом сообщении...
     case 'message_new':
-	
-	if(var_dump(is_int($data->object->body))){
+	$bodyText = $data->object->body;
+	if(var_dump(is_int($bodyText))){
 		//$db_selected = mysql_select_db('f0229431_root', $link);
 		
 		$result = mysql_query("SELECT count FROM countsmart");
