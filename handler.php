@@ -43,19 +43,25 @@ switch ($data->type) {
 		$bodyText = intval($data->object->body);
 		
 		//$db_selected = mysql_select_db('f0229431_root', $link);
+		$sql = "UPDATE count SET count='".$bodyText."'";
+
+		$request_params = "null";
 		
-		$result = mysqli_query("UPDATE count SET count='".$bodyText."'");
-		if (!$result) {
-			$message  = 'Неверный запрос: ' . mysql_error() . "\n";
-			die($message);
+		if ($conn->query($sql) === TRUE) {
+			$request_params = array(
+			'user_id' => $data->object->user_id,
+			'message' => 'Количество изменено на: '.$bodyText,
+			'access_token' => $token,
+			'v' => '5.69'		
+			);
+		} else {
+			$request_params = array(
+			'user_id' => $data->object->user_id,
+			'message' => 'Ошибка: '.$conn->error,
+			'access_token' => $token,
+			'v' => '5.69'		
+			);
 		}
-		
-		$request_params = array(
-		'user_id' => $data->object->user_id,
-		'message' => 'Количество изменено на: '.$bodyText,
-		'access_token' => $token,
-		'v' => '5.69'		
-		);
 		
         file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));		
 	
