@@ -4,6 +4,8 @@ if (!isset($_REQUEST)) {
     return;
 }
 
+echo "sdfghg";
+
 //Строка для подтверждения адреса сервера из настроек Callback API
 $confirmationToken = 'c06880a7';
 
@@ -11,13 +13,13 @@ $confirmationToken = 'c06880a7';
 $token = '7b45b786905029b4ffc0588e8f4ac23c1cfc2a270536ab6e2005198f0d550821354004a88e703a1e57ed2';
 
 // Secret key
-$secretKey = 'testSecureKey';
+$secretKey = 'TestADMIN';
 
 //Получаем и декодируем уведомление
 $data = json_decode(file_get_contents('php://input'));
 
 // проверяем secretKey
-if(strcmp($data->secret, $secretKey) !== 0 && strcmp($data->type, 'confirmation') !== 0)
+if($data->secret !== $secretKey && $data->type != 'confirmation')
     return;
 
 //echo $data;
@@ -32,7 +34,6 @@ switch ($data->type) {
 
     //Если это уведомление о новом сообщении...
     case 'message_new':
-		echo $data;
         //...получаем id его автора
         $userId = $data->object->user_id;
         //затем с помощью users.get получаем данные об авторе
