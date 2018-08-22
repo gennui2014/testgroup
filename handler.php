@@ -34,7 +34,17 @@ switch ($data->type) {
 
     //Если это уведомление о новом сообщении...
     case 'message_new':
-        //...получаем id его автора
+		$request_params = array(
+		'user_id' => $data->object->user_id,
+		'message' => 'Test',
+		'access_token' => $token,
+		'v' => '5.8'		
+		);
+		
+        file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
+		
+		return 'ok';
+        /*//...получаем id его автора
         $userId = $data->object->user_id;
         //затем с помощью users.get получаем данные об авторе
         $userInfo = json_decode(file_get_contents("https://api.vk.com/method/users.get?user_ids={$userId}&v=5.80"));
@@ -57,7 +67,7 @@ switch ($data->type) {
 
         //Возвращаем "ok" серверу Callback API
         echo('ok');
-
+*/
         break;
 
     // Если это уведомление о вступлении в группу
