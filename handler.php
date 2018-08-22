@@ -40,7 +40,8 @@ switch ($data->type) {
 
     //Если это уведомление о новом сообщении...
     case 'message_new':
-	$bodyText = $data->object->body;
+	$bodyText = intval($data->object->body);
+	
 	if(var_dump(is_int($bodyText))){
 		//$db_selected = mysql_select_db('f0229431_root', $link);
 		
