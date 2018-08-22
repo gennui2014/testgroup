@@ -44,7 +44,7 @@ switch ($data->type) {
 		
 		//$db_selected = mysql_select_db('f0229431_root', $link);
 		
-		$result = mysql_query("UPDATE count SET count='".$bodyText."'");
+		$result = mysqli_query("UPDATE count SET count='".$bodyText."'");
 		if (!$result) {
 			$message  = 'Неверный запрос: ' . mysql_error() . "\n";
 			die($message);
